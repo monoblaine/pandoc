@@ -803,17 +803,18 @@ bulletListItemToMarkdown :: PandocMonad m => WriterOptions -> [Block] -> MD m (D
 bulletListItemToMarkdown opts bs = do
   variant <- asks envVariant
   let exts = writerExtensions opts
+  let bulletListMarker = writerBulletListMarker opts <> " "
   contents <- blockListToMarkdown opts $ taskListItemToAscii exts bs
   let start = case variant of
-              Markua -> "* "
-              Commonmark -> "- "
+              Markua -> bulletListMarker
+              Commonmark -> bulletListMarker
               Markdown
                 | isEnabled Ext_four_space_rule opts
-                  -> "- " <> T.replicate (writerTabStop opts - 2) " "
+                  -> bulletListMarker <> T.replicate (writerTabStop opts - 2) " "
               PlainText
                 | isEnabled Ext_four_space_rule opts
-                  -> "- " <> T.replicate (writerTabStop opts - 2) " "
-              _ -> "- "
+                  -> bulletListMarker <> T.replicate (writerTabStop opts - 2) " "
+              _ -> bulletListMarker
   -- remove trailing blank line if item ends with a tight list
   let contents' = if itemEndsWithTightList bs
                      then chomp contents <> cr

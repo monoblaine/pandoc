@@ -374,6 +374,7 @@ data WriterOptions = WriterOptions
   , writerSlideLevel        :: Maybe Int  -- ^ Force header level of slides
   , writerTopLevelDivision  :: TopLevelDivision -- ^ Type of top-level divisions
   , writerHighlightMethod   :: HighlightMethod  -- ^ Style to use for highlighting
+  , writerBulletListMarker  :: Text       -- ^ Bullet list marker in markdown
   , writerSetextHeaders     :: Bool       -- ^ Use setext headers for levels 1-2 in markdown
   , writerListTables        :: Bool       -- ^ Use list tables for RST tables
   , writerEpubSubdirectory  :: Text       -- ^ Subdir for epub in OCF
@@ -416,6 +417,7 @@ instance Default WriterOptions where
                       , writerSlideLevel       = Nothing
                       , writerTopLevelDivision = TopLevelDefault
                       , writerHighlightMethod  = DefaultHighlighting
+                      , writerBulletListMarker = "-"
                       , writerSetextHeaders    = False
                       , writerListTables       = False
                       , writerEpubSubdirectory = "EPUB"
