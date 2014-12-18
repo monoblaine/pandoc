@@ -215,6 +215,11 @@ typeWriterOptions = deftype "WriterOptions"
     (maybe pushnil pushIntegral, writerSlideLevel)
     (optional . peekIntegral, \opts x -> opts{ writerSlideLevel = x })
 
+  , property "bullet_list_marker"
+    "Marker for bullet list in Markdown"
+    (pushText, writerBulletListMarker)
+    (peekText, \opts x -> opts{ writerBulletListMarker = x })
+
   -- , property "syntax_map" "Syntax highlighting definition"
   --   (pushViaJSON, writerSyntaxMap)
   --   (peekViaJSON, \opts x -> opts{ writerSyntaxMap = x })

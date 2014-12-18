@@ -257,6 +257,7 @@ optToOutputSettings scriptingEngine opts = do
         , writerTopLevelDivision = optTopLevelDivision opts
         , writerSlideLevel       = optSlideLevel opts
         , writerHighlightMethod  = hlStyle
+        , writerBulletListMarker = optBulletListMarker opts
         , writerSetextHeaders    = optSetextHeaders opts
         , writerListTables       = optListTables opts
         , writerEpubSubdirectory = T.pack $ optEpubSubdirectory opts

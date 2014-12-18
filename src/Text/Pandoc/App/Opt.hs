@@ -162,6 +162,7 @@ data Opt = Opt
     , optPdfEngine             :: Maybe String -- ^ Program to use for latex/html -> pdf
     , optPdfEngineOpts         :: [String]   -- ^ Flags to pass to the engine
     , optSlideLevel            :: Maybe Int  -- ^ Header level that creates slides
+    , optBulletListMarker      :: Text     -- ^ Bullet list marker in markdown
     , optSetextHeaders         :: Bool       -- ^ Use atx headers for markdown level 1-2
     , optListTables            :: Bool       -- ^ Use list tables for RST
     , optAscii                 :: Bool       -- ^ Prefer ascii output
@@ -250,6 +251,7 @@ instance FromJSON Opt where
        <*> o .:? "pdf-engine"
        <*> o .:? "pdf-engine-opts" .!= optPdfEngineOpts defaultOpts
        <*> o .:? "slide-level"
+       <*> o .:? "bullet-list-marker" .!= optBulletListMarker defaultOpts
        <*> o .:? "setext-headers" .!= optSetextHeaders defaultOpts
        <*> o .:? "list-tables" .!= optListTables defaultOpts
        <*> o .:? "ascii" .!= optAscii defaultOpts
@@ -680,6 +682,9 @@ doOpt (k,v) = do
              return (\o -> o{ optPdfEngineOpts = [unpack x] }))
     "slide-level" ->
       parseJSON v >>= \x -> return (\o -> o{ optSlideLevel = x })
+    "bullet-list-marker" ->
+      parseJSON v >>= \x ->
+             return (\o -> o{ optBulletListMarker = x })
     "markdown-headings" ->
       parseJSON v >>= \x -> return (\o ->
         case T.toLower x of
@@ -828,6 +833,7 @@ defaultOpts = Opt
     , optPdfEngine             = Nothing
     , optPdfEngineOpts         = []
     , optSlideLevel            = Nothing
+    , optBulletListMarker      = "-"
     , optSetextHeaders         = False
     , optListTables            = False
     , optAscii                 = False

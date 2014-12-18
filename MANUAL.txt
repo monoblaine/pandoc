@@ -1143,6 +1143,9 @@ header when requesting a document from a URL:
     placement of link references is affected by the
     `--reference-location` option.
 
+`--bullet-list-marker=`*minus|plus|asterisk*
+:   Specify bullet list marker in markdown. The default is `minus`.
+
 `--reference-location=block`|`section`|`document`
 
 :   Specify whether footnotes (and references, if `reference-links` is
