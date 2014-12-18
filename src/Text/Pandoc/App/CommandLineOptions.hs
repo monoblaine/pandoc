@@ -823,6 +823,20 @@ options =
                  OptFlag
                  (T.pack "Use reference links in HTML")
 
+    , option "" ["bullet-list-marker"]
+                 (ReqArg
+                  (\arg opt -> do
+                     marker <- case arg of
+                            "minus"    -> return "-"
+                            "plus"     -> return "+"
+                            "asterisk" -> return "*"
+                            _          -> optError $ PandocOptionError $ T.pack
+                               ("Unknown bullet list marker: " ++ arg)
+                     return opt { optBulletListMarker = marker })
+                  "minus|plus|asterisk")
+                 (Fixed ["minus","plus","asterisk"])
+                 (T.pack "Marker for bullet list in Markdown")
+
     , option "" ["reference-location"]
                  (ReqArg
                   (\arg opt -> do

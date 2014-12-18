@@ -330,6 +330,7 @@ server = convertBytes
              , writerCiteMethod = optCiteMethod opts
              , writerHtmlQTags = optHtmlQTags opts
              , writerSlideLevel = optSlideLevel opts
+             , writerBulletListMarker = optBulletListMarker opts
              , writerTopLevelDivision = optTopLevelDivision opts
              , writerHighlightMethod = hlStyle
              , writerSetextHeaders = optSetextHeaders opts
