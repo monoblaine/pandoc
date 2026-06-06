@@ -58,6 +58,7 @@
 !trypandoc/**
 !xml-light/**
 !windows/**
+!.build.sh
 *.bkp
 *.orig
 *.o
