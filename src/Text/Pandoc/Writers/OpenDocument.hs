@@ -122,7 +122,7 @@ resetIndent :: PandocMonad m => OD m ()
 resetIndent = modify $ \s -> s { stIndentPara = stIndentPara s - 1 }
 
 inTightList :: PandocMonad m => OD m a -> OD m a
-inTightList  f = modify (\s -> s { stTight = True  }) >> f >>= \r ->
+inTightList  f = modify (\s -> s { stTight = False }) >> f >>= \r ->
                  modify (\s -> s { stTight = False }) >> return r
 
 setInDefinitionList :: PandocMonad m => Bool -> OD m ()
