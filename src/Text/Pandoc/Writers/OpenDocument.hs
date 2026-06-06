@@ -156,7 +156,7 @@ inParagraphTags d = do
   b <- gets stFirstPara
   a <- if b
        then do modify $ \st -> st { stFirstPara = False }
-               return [("text:style-name", "First_20_paragraph")]
+               return [("text:style-name", "Text_20_body")]
        else    return   [("text:style-name", "Text_20_body")]
   return $ inTags False "text:p" a d
 
