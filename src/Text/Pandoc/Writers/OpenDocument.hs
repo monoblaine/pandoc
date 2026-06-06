@@ -166,7 +166,7 @@ inParagraphTags d = do
   b <- gets stFirstPara
   sty <- if b
          then do modify $ \st -> st { stFirstPara = False }
-                 return "First_20_paragraph"
+                 return "Text_20_body"
          else    return "Text_20_body"
   sty' <- dirStyleFor sty
   return $ inTags False "text:p" [("text:style-name", sty')] d
