@@ -54,14 +54,14 @@ plainToPara x         = x
 -- Names of predefined styles in the reference.odt; see data/odt/styles.xml.
 defaultBulletListStyleName, defaultNumberedListStyleName :: Text
 defaultBulletListStyleName   = "List_20_1"
-defaultNumberedListStyleName = "Numbering_20_1"
+defaultNumberedListStyleName = "Numbering_20_123"
 
 bulletItemStyleName, bulletItemTightStyleName,
   numberItemStyleName, numberItemTightStyleName :: Text
 bulletItemStyleName      = "List_20_1"
 bulletItemTightStyleName = "List_20_1"
-numberItemStyleName      = "List_20_Number"
-numberItemTightStyleName = "List_20_Number_20_Tight"
+numberItemStyleName      = "Numbering_20_1"
+numberItemTightStyleName = "Numbering_20_1"
 
 -- | Predefined inline style names for single-style spans.
 wellKnownTextStyle :: Set.Set TextStyle -> Maybe Text
