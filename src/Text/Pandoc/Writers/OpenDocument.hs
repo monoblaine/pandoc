@@ -335,7 +335,7 @@ bulletListToOpenDocument o b = do
   (pn,ns) <- if isTightList b then inTightList (bulletListStyle ln) else bulletListStyle ln
   modify $ \s -> s { stListStyles = ns : stListStyles s }
   is <- listItemsToOpenDocument ("P" <> tshow pn) o b
-  return $ inTags True "text:list" [("text:style-name", "L" <> tshow ln)] is
+  return $ inTags True "text:list" [("text:style-name", "List_20_1")] is
 
 listItemsToOpenDocument :: PandocMonad m
                         => Text -> WriterOptions -> [[Block]] -> OD m (Doc Text)
@@ -889,8 +889,8 @@ paraStyleFromParent parent attrs = do
 
 paraListStyle :: PandocMonad m => Int -> OD m Int
 paraListStyle l = paraStyle
-  [("style:parent-style-name","Text_20_body")
-  ,("style:list-style-name", "L" <> tshow l)]
+  [("style:parent-style-name","List_20_1")
+  ,("style:list-style-name", "")]
 
 paraTableStyles :: Text -> Int -> [Alignment] -> [(Text, Doc Text)]
 paraTableStyles _ _ [] = []
