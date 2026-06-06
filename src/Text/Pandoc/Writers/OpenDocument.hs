@@ -58,8 +58,8 @@ defaultNumberedListStyleName = "Numbering_20_1"
 
 bulletItemStyleName, bulletItemTightStyleName,
   numberItemStyleName, numberItemTightStyleName :: Text
-bulletItemStyleName      = "List_20_Bullet"
-bulletItemTightStyleName = "List_20_Bullet_20_Tight"
+bulletItemStyleName      = "List_20_1"
+bulletItemTightStyleName = "List_20_1"
 numberItemStyleName      = "List_20_Number"
 numberItemTightStyleName = "List_20_Number_20_Tight"
 
