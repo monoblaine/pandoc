@@ -748,7 +748,7 @@ inlineToOpenDocument o ils
                   -> return $ preformatted "\n"
      | otherwise  -> return space
     Span ("", ["mark"], []) xs ->
-      inTags False "text:span" [("text:style-name","Highlighted")] <$>
+      inTags False "text:span" [("text:style-name","Highlighted_20_Text")] <$>
         inlinesToOpenDocument o xs
     Span attr xs  -> mkSpan attr xs
     LineBreak     -> return $ selfClosingTag "text:line-break" []
