@@ -380,7 +380,7 @@ inlineToMarkdown opts (Emph lst) = do
              PlainText
                | isEnabled Ext_gutenberg opts -> delimited "_" "_" contents
                | otherwise ->  contents
-             _ -> delimited "*" "*" contents
+             _ -> delimited "_" "_" contents
 inlineToMarkdown _ (Underline []) = return empty
 inlineToMarkdown opts (Underline lst) = do
   variant <- asks envVariant
