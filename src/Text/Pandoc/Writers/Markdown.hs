@@ -579,8 +579,11 @@ blockToMarkdown' opts (CodeBlock (_,classes,_) str)
   return $ prefixed "> " (literal str) <> blankline
 blockToMarkdown' opts (CodeBlock attribs str) = do
   variant <- asks envVariant
+  -- Commonmark/GFM always prefer fenced code blocks, even with empty
+  -- attributes.  Indented code is still used for pandoc markdown when
+  -- there are no attributes to preserve.
   return $
-   case attribs == nullAttr of
+   case attribs == nullAttr && variant /= Commonmark of
      False | variant == Commonmark ||
              isEnabled Ext_backtick_code_blocks opts ->
           backticks <> attrs <> cr <> literal str <> cr <> backticks <> blankline
@@ -904,10 +907,12 @@ blockListToMarkdown opts blocks = do
   -- b) change Plain to Para unless it's followed by a RawBlock
   -- or has a list as its parent (#3487)
   let fixBlocks (b : CodeBlock attr x : rest)
+       -- Only needed when the code block will be written indented;
+       -- Commonmark/GFM use fenced form even with empty attributes.
        | (not (variant == Commonmark ||
                isEnabled Ext_backtick_code_blocks opts ||
                  isEnabled Ext_fenced_code_blocks opts) ||
-              attr == nullAttr)
+              (attr == nullAttr && variant /= Commonmark))
             && isListBlock b
               = b : commentSep : CodeBlock attr x : fixBlocks rest
       fixBlocks (b1@(BulletList _) : b2@(BulletList _) : bs) =
