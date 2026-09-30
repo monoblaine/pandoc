@@ -65,8 +65,7 @@ syntax.</text:p>
     </table:table-cell>
   </table:table-row>
 </table:table>
-<text:p text:style-name="Text_20_body">Simple table without
-caption:</text:p>
+<text:p text:style-name="Text_20_body">Simple table without caption:</text:p>
 <table:table table:name="Table2" table:style-name="Table2">
   <table:table-column table:style-name="Table2.A" />
   <table:table-column table:style-name="Table2.B" />
@@ -199,8 +198,7 @@ syntax.</text:p>
     </table:table-cell>
   </table:table-row>
 </table:table>
-<text:p text:style-name="Text_20_body">Multiline table with
-caption:</text:p>
+<text:p text:style-name="Text_20_body">Multiline table with caption:</text:p>
 <text:p text:style-name="TableCaption">Here’s the caption. It may span multiple
 lines.</text:p>
 <table:table table:name="Table4" table:style-name="Table4">
@@ -255,8 +253,7 @@ lines.</text:p>
     </table:table-cell>
   </table:table-row>
 </table:table>
-<text:p text:style-name="Text_20_body">Multiline table without
-caption:</text:p>
+<text:p text:style-name="Text_20_body">Multiline table without caption:</text:p>
 <table:table table:name="Table5" table:style-name="Table5">
   <table:table-column table:style-name="Table5.A" />
   <table:table-column table:style-name="Table5.B" />
@@ -309,8 +306,7 @@ caption:</text:p>
     </table:table-cell>
   </table:table-row>
 </table:table>
-<text:p text:style-name="Text_20_body">Table without column
-headers:</text:p>
+<text:p text:style-name="Text_20_body">Table without column headers:</text:p>
 <table:table table:name="Table6" table:style-name="Table6">
   <table:table-column table:style-name="Table6.A" />
   <table:table-column table:style-name="Table6.B" />

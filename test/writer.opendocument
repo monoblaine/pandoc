@@ -245,8 +245,7 @@ link</text:span></text:a><text:bookmark-end text:name="level-2-with-an-embedded-
 <text:p text:style-name="Text_20_body">with no blank line</text:p>
 <text:p text:style-name="Horizontal_20_Line" />
 <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark-start text:name="paragraphs" />Paragraphs<text:bookmark-end text:name="paragraphs" /></text:h>
-<text:p text:style-name="Text_20_body">Here’s a regular
-paragraph.</text:p>
+<text:p text:style-name="Text_20_body">Here’s a regular paragraph.</text:p>
 <text:p text:style-name="Text_20_body">In Markdown 1.0.0 and earlier. Version 8.
 This line turns into a list item. Because a hard-wrapped line in the middle of a
 paragraph looked like a list item.</text:p>
@@ -276,8 +275,8 @@ short.</text:p>
 <text:p text:style-name="Quotations">Nested block quotes:</text:p>
 <text:p text:style-name="P1">nested</text:p>
 <text:p text:style-name="P2">nested</text:p>
-<text:p text:style-name="Text_20_body">This should not be a block quote: 2
-&gt; 1.</text:p>
+<text:p text:style-name="Text_20_body">This should not be a block quote: 2 &gt;
+1.</text:p>
 <text:p text:style-name="Text_20_body">And a following paragraph.</text:p>
 <text:p text:style-name="Horizontal_20_Line" />
 <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark-start text:name="code-blocks" />Code
@@ -469,8 +468,7 @@ Blocks<text:bookmark-end text:name="code-blocks" /></text:h>
     <text:p text:style-name="List_20_Number">Third</text:p>
   </text:list-item>
 </text:list>
-<text:p text:style-name="Text_20_body">Same thing but with
-paragraphs:</text:p>
+<text:p text:style-name="Text_20_body">Same thing but with paragraphs:</text:p>
 <text:list text:style-name="Numbering_20_1">
   <text:list-item>
     <text:p text:style-name="List_20_Number">First</text:p>
@@ -525,19 +523,17 @@ list markers<text:bookmark-end text:name="fancy-list-markers" /></text:h>
     <text:p text:style-name="List_20_Number">with a continuation</text:p>
     <text:list text:style-name="Pandoc_5f_Numbering_5f_2">
       <text:list-item>
-        <text:p text:style-name="List_20_Number">sublist with roman
-        numerals starting with i.</text:p>
+        <text:p text:style-name="List_20_Number">sublist with roman numerals
+        starting with i.</text:p>
       </text:list-item>
       <text:list-item>
         <text:p text:style-name="List_20_Number">more items</text:p>
         <text:list text:style-name="Pandoc_5f_Numbering_5f_3">
           <text:list-item>
-            <text:p text:style-name="List_20_Number">a
-            subsublist</text:p>
+            <text:p text:style-name="List_20_Number">a subsublist</text:p>
           </text:list-item>
           <text:list-item>
-            <text:p text:style-name="List_20_Number">a
-            subsublist</text:p>
+            <text:p text:style-name="List_20_Number">a subsublist</text:p>
           </text:list-item>
         </text:list>
       </text:list-item>
@@ -557,8 +553,8 @@ list markers<text:bookmark-end text:name="fancy-list-markers" /></text:h>
             1</text:p>
             <text:list text:style-name="Pandoc_5f_Numbering_5f_6">
               <text:list-item>
-                <text:p text:style-name="List_20_Number">Lower alpha
-                with paren</text:p>
+                <text:p text:style-name="List_20_Number">Lower alpha with
+                paren</text:p>
               </text:list-item>
             </text:list>
           </text:list-item>
@@ -612,8 +608,7 @@ fruit</text:p>
 <text:p text:style-name="Definition_20_Definition">orange fruit</text:p>
 <text:p text:style-name="Definition_20_Term">banana</text:p>
 <text:p text:style-name="Definition_20_Definition">yellow fruit</text:p>
-<text:p text:style-name="Text_20_body">Multiple blocks with
-italics:</text:p>
+<text:p text:style-name="Text_20_body">Multiple blocks with italics:</text:p>
 <text:p text:style-name="Definition_20_Term"><text:span text:style-name="Emphasis">apple</text:span></text:p>
 <text:p text:style-name="Definition_20_Definition">red
 fruit</text:p><text:p text:style-name="Definition_20_Definition">contains seeds,
@@ -622,8 +617,7 @@ crisp, pleasant to taste</text:p>
 <text:p text:style-name="Definition_20_Definition">orange
 fruit</text:p><text:p text:style-name="Preformatted_20_Text">{ orange code block }</text:p><text:p text:style-name="P3">orange
 block quote</text:p>
-<text:p text:style-name="Text_20_body">Multiple definitions,
-tight:</text:p>
+<text:p text:style-name="Text_20_body">Multiple definitions, tight:</text:p>
 <text:p text:style-name="Definition_20_Term_20_Tight">apple</text:p>
 <text:p text:style-name="Definition_20_Definition_20_Tight">red fruit</text:p>
 <text:p text:style-name="Definition_20_Definition_20_Tight">computer</text:p>
@@ -631,16 +625,15 @@ tight:</text:p>
 <text:p text:style-name="Definition_20_Definition_20_Tight">orange
 fruit</text:p>
 <text:p text:style-name="Definition_20_Definition_20_Tight">bank</text:p>
-<text:p text:style-name="Text_20_body">Multiple definitions,
-loose:</text:p>
+<text:p text:style-name="Text_20_body">Multiple definitions, loose:</text:p>
 <text:p text:style-name="Definition_20_Term">apple</text:p>
 <text:p text:style-name="Definition_20_Definition">red fruit</text:p>
 <text:p text:style-name="Definition_20_Definition">computer</text:p>
 <text:p text:style-name="Definition_20_Term">orange</text:p>
 <text:p text:style-name="Definition_20_Definition">orange fruit</text:p>
 <text:p text:style-name="Definition_20_Definition">bank</text:p>
-<text:p text:style-name="Text_20_body">Blank line after term, indented
-marker, alternate markers:</text:p>
+<text:p text:style-name="Text_20_body">Blank line after term, indented marker,
+alternate markers:</text:p>
 <text:p text:style-name="Definition_20_Term">apple</text:p>
 <text:p text:style-name="Definition_20_Definition">red fruit</text:p>
 <text:p text:style-name="Definition_20_Definition">computer</text:p>
@@ -682,8 +675,8 @@ comment:</text:p>
 <text:p text:style-name="Text_20_body">Multiline:</text:p>
 <text:p text:style-name="Text_20_body">Code block:</text:p>
 <text:p text:style-name="Preformatted_20_Text">&lt;!-- Comment --&gt;</text:p>
-<text:p text:style-name="Text_20_body">Just plain comment, with trailing
-spaces on the line:</text:p>
+<text:p text:style-name="Text_20_body">Just plain comment, with trailing spaces
+on the line:</text:p>
 <text:p text:style-name="Text_20_body">Code:</text:p>
 <text:p text:style-name="Preformatted_20_Text">&lt;hr /&gt;</text:p>
 <text:p text:style-name="Text_20_body">Hr’s:</text:p>
@@ -730,8 +723,8 @@ subscripts, because of the unescaped spaces: a^b c^d, a~b c~d.</text:p>
 <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark-start text:name="smart-quotes-ellipses-dashes" />Smart
 quotes, ellipses,
 dashes<text:bookmark-end text:name="smart-quotes-ellipses-dashes" /></text:h>
-<text:p text:style-name="Text_20_body">“Hello,” said the spider. “‘Shelob’
-is my name.”</text:p>
+<text:p text:style-name="Text_20_body">“Hello,” said the spider. “‘Shelob’ is my
+name.”</text:p>
 <text:p text:style-name="Text_20_body">‘A’, ‘B’, and ‘C’ are letters.</text:p>
 <text:p text:style-name="Text_20_body">‘Oak,’ ‘elm,’ and ‘beech’ are names of
 trees. So is ‘pine.’</text:p>
@@ -772,16 +765,15 @@ five.</text:p>
     $$\frac{d}{dx}f(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$$</text:p>
   </text:list-item>
   <text:list-item>
-    <text:p text:style-name="List_20_Bullet">Here’s one that has a line
-    break in it:
+    <text:p text:style-name="List_20_Bullet">Here’s one that has a line break in
+    it:
     <text:span text:style-name="Emphasis">α</text:span> + <text:span text:style-name="Emphasis">ω</text:span> × <text:span text:style-name="Emphasis">x</text:span><text:span text:style-name="Superscript">2</text:span>.</text:p>
   </text:list-item>
 </text:list>
 <text:p text:style-name="Text_20_body">These shouldn’t be math:</text:p>
 <text:list text:style-name="List_20_1">
   <text:list-item>
-    <text:p text:style-name="List_20_Bullet">To get the famous
-    equation, write
+    <text:p text:style-name="List_20_Bullet">To get the famous equation, write
     <text:span text:style-name="Source_20_Text">$e = mc^2$</text:span>.</text:p>
   </text:list-item>
   <text:list-item>
@@ -921,8 +913,8 @@ link in pointy braces</text:span></text:a>.</text:p>
 <text:p text:style-name="Preformatted_20_Text">or here: &lt;http://example.com/&gt;</text:p>
 <text:p text:style-name="Horizontal_20_Line" />
 <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark-start text:name="images" />Images<text:bookmark-end text:name="images" /></text:h>
-<text:p text:style-name="Text_20_body">From “Voyage dans la Lune” by
-Georges Melies (1902):</text:p>
+<text:p text:style-name="Text_20_body">From “Voyage dans la Lune” by Georges
+Melies (1902):</text:p>
 <text:p text:style-name="FigureWithCaption"><draw:frame draw:name="img1" text:anchor-type="as-char"><draw:image xlink:href="lalune.jpg" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" /></draw:frame></text:p>
 <text:p text:style-name="FigureCaption">lalune</text:p>
 <text:p text:style-name="Text_20_body">Here is a movie
@@ -960,8 +952,8 @@ quote.</text:p></text:note-body></text:note></text:p>
     list.</text:p></text:note-body></text:note></text:p>
   </text:list-item>
 </text:list>
-<text:p text:style-name="Text_20_body">This paragraph should not be part
-of the note, as it is not indented.</text:p>
+<text:p text:style-name="Text_20_body">This paragraph should not be part of the
+note, as it is not indented.</text:p>
 </office:text>
 </office:body>
 </office:document-content>
