@@ -233,9 +233,10 @@ addHlStyles sty el =
    isHlStyle _ = False
 
 -- | Ensure the office:styles element contains paragraph styles for
--- list items used by the OpenDocument writer.  This injects only the
--- styles that are missing, so a user-supplied reference.odt may
--- override any of them.
+-- list items.  This injects only the styles that are missing, so a
+-- user-supplied reference.odt may override any of them.  The Tight
+-- variants are still injected for compatibility, but the writer
+-- selects only the non-tight bullet and numbering styles.
 addListItemStyles :: Element -> Element
 addListItemStyles el =
   el{ elContent = elContent el ++ map Elem missingStyles }

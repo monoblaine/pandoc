@@ -52,16 +52,18 @@ plainToPara (Plain x) = Para x
 plainToPara x         = x
 
 -- Names of predefined styles in the reference.odt; see data/odt/styles.xml.
+-- Bullet lists use @List_20_1@.  Item paragraphs use the non-tight
+-- @List_20_Bullet@ / @List_20_Number@ styles even when the list is
+-- tight, so tight lists keep normal paragraph spacing.  The zero-margin
+-- @*_Tight@ styles stay in the reference document but are not selected.
+-- Definition lists still distinguish tight and loose styles.
 defaultBulletListStyleName, defaultNumberedListStyleName :: Text
 defaultBulletListStyleName   = "List_20_1"
 defaultNumberedListStyleName = "Numbering_20_1"
 
-bulletItemStyleName, bulletItemTightStyleName,
-  numberItemStyleName, numberItemTightStyleName :: Text
-bulletItemStyleName      = "List_20_Bullet"
-bulletItemTightStyleName = "List_20_Bullet_20_Tight"
-numberItemStyleName      = "List_20_Number"
-numberItemTightStyleName = "List_20_Number_20_Tight"
+bulletItemStyleName, numberItemStyleName :: Text
+bulletItemStyleName = "List_20_Bullet"
+numberItemStyleName = "List_20_Number"
 
 -- | Predefined inline style names for single-style spans.
 wellKnownTextStyle :: Set.Set TextStyle -> Maybe Text
@@ -100,7 +102,6 @@ data WriterState =
                 , stIndentPara     :: Int
                 , stInDefinition   :: Bool
                 , stTight          :: Bool
-                , stFirstPara      :: Bool
                 , stImageId        :: Int
                 , stTableCaptionId :: Int
                 , stImageCaptionId :: Int
@@ -123,7 +124,6 @@ defaultWriterState =
                 , stIndentPara     = 0
                 , stInDefinition   = False
                 , stTight          = False
-                , stFirstPara      = False
                 , stImageId        = 1
                 , stTableCaptionId = 1
                 , stImageCaptionId = 1
@@ -158,18 +158,13 @@ resetIndent = modify $ \s -> s { stIndentPara = stIndentPara s - 1 }
 setInDefinitionList :: PandocMonad m => Bool -> OD m ()
 setInDefinitionList b = modify $  \s -> s { stInDefinition = b }
 
-setFirstPara :: PandocMonad m => OD m ()
-setFirstPara =  modify $  \s -> s { stFirstPara = True }
-
 inParagraphTags :: PandocMonad m => Doc Text -> OD m (Doc Text)
 inParagraphTags d = do
-  b <- gets stFirstPara
-  sty <- if b
-         then do modify $ \st -> st { stFirstPara = False }
-                 return "First_20_paragraph"
-         else    return "Text_20_body"
-  sty' <- dirStyleFor sty
-  return $ inTags False "text:p" [("text:style-name", sty')] d
+  -- Body paragraphs always use Text_20_body, including the first
+  -- paragraph after a heading or other block.  Direction overrides
+  -- still go through an automatic style derived from Text_20_body.
+  sty <- dirStyleFor "Text_20_body"
+  return $ inTags False "text:p" [("text:style-name", sty)] d
 
 inParagraphTagsWithStyle :: Text -> Doc Text -> Doc Text
 inParagraphTagsWithStyle sty = inTags False "text:p" [("text:style-name", sty)]
@@ -419,11 +414,9 @@ orderedItemToOpenDocument  o paraName bs = vcat <$> mapM go bs
        go b                 = blockToOpenDocument o b
        orderedList a@(_,ns,nd) l = do
          lstName <- orderedListStyleName ns nd
-         let pn = if isTightList l then numberItemTightStyleName
-                                   else numberItemStyleName
          let listAttrs = ("text:style-name", lstName) : startValueAttr a
          inTags True "text:list" listAttrs <$>
-           orderedListToOpenDocument o pn l
+           orderedListToOpenDocument o numberItemStyleName l
 
 -- | Generate a @text:start-value@ attribute when the start value is not 1.
 startValueAttr :: ListAttributes -> [(Text, Text)]
@@ -439,9 +432,7 @@ isTightList (b:_)
 bulletListToOpenDocument :: PandocMonad m
                          => WriterOptions -> [[Block]] -> OD m (Doc Text)
 bulletListToOpenDocument o b = do
-  let pn = if isTightList b then bulletItemTightStyleName
-                            else bulletItemStyleName
-  is <- listItemsToOpenDocument pn o b
+  is <- listItemsToOpenDocument bulletItemStyleName o b
   return $ inTags True "text:list"
              [("text:style-name", defaultBulletListStyleName)] is
 
@@ -491,15 +482,13 @@ blockToOpenDocument o = \case
                         else inParagraphTags =<< inlinesToOpenDocument o b
     LineBlock      b -> blockToOpenDocument o $ linesToPara b
     Div attr xs      -> mkDiv attr xs
-    Header     i (ident,_,_) b -> do
-      setFirstPara
+    Header     i (ident,_,_) b ->
       inHeaderTags i ident =<< inlinesToOpenDocument o b
-    BlockQuote     b -> setFirstPara >> mkBlockQuote b
-    DefinitionList b -> setFirstPara >> defList b
-    BulletList     b -> setFirstPara >> bulletListToOpenDocument o b
-    OrderedList  a b -> setFirstPara >> orderedList a b
+    BlockQuote     b -> mkBlockQuote b
+    DefinitionList b -> defList b
+    BulletList     b -> bulletListToOpenDocument o b
+    OrderedList  a b -> orderedList a b
     CodeBlock attrs s -> do
-      setFirstPara
       let highlighted =
             case highlight (writerSyntaxMap o) formatOpenDocument attrs s of
                 Right h  -> return $ flush . vcat $ map (inTags True "text:p"
@@ -512,9 +501,8 @@ blockToOpenDocument o = \case
         Skylighting {} -> highlighted
         DefaultHighlighting -> highlighted
         _ -> unhighlighted s
-    Table a bc s th tb tf -> setFirstPara >>
-                              table o (Ann.toTable a bc s th tb tf)
-    HorizontalRule   -> setFirstPara >> return (selfClosingTag "text:p"
+    Table a bc s th tb tf -> table o (Ann.toTable a bc s th tb tf)
+    HorizontalRule   -> return (selfClosingTag "text:p"
                          [ ("text:style-name", "Horizontal_20_Line") ])
     b@(RawBlock f s) -> if f == Format "opendocument"
                         then return $ text $ T.unpack s
@@ -542,11 +530,9 @@ blockToOpenDocument o = \case
                            inBlockQuote o sty (map plainToPara b)
       orderedList a@(_,ns,nd) b = do
         lstName <- orderedListStyleName ns nd
-        let pn = if isTightList b then numberItemTightStyleName
-                                  else numberItemStyleName
         let listAttrs = ("text:style-name", lstName) : startValueAttr a
         inTags True "text:list" listAttrs <$>
-          orderedListToOpenDocument o pn b
+          orderedListToOpenDocument o numberItemStyleName b
       table :: PandocMonad m => WriterOptions -> Ann.Table -> OD m (Doc Text)
       table opts
           (Ann.Table (ident, _, _) (Caption _ c) colspecs thead tbodies tfoot) = do
