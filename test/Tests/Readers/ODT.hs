@@ -165,6 +165,7 @@ namesOfTestsComparingToMarkdown  = [ "blockquote2"
 
 namesOfTestsComparingToNative  :: [ String ]
 namesOfTestsComparingToNative   = [ "blockquote"
+                                  , "boldParagraphStyle"
                                   , "image"
                                   , "imageIndex"
                                   , "imageRelative"

@@ -311,19 +311,22 @@ withNewStyle a = proc x -> do
           state        <- getExtraState             -< ()
           let triple = (state, textProps, mFamily)
           modifier     <- arr modifierFromStyleDiff -< triple
+          -- Only text styles belong on the inheritance trace: nested text
+          -- styles often omit attributes that should be inherited from a
+          -- surrounding paragraph style, and the reader treats omission as
+          -- an explicit default.  Paragraph styles must still apply their
+          -- own text properties (e.g. fo:font-weight="bold" on an
+          -- automatic paragraph style).
           fShouldTrace <- isStyleToTrace            -< style
           case fShouldTrace of
-            Right shouldTrace ->
-              if shouldTrace
-                then do
-                  pushStyle      -< style
-                  inlines   <- a -< x
-                  popStyle       -< ()
-                  arr modifier   -<< inlines
-                else
-    -- In case anything goes wrong
-                      a -< x
-            Left _ -> a -< x
+            Right True -> do
+              pushStyle    -< style
+              inlines <- a -< x
+              popStyle     -< ()
+              arr (modifyNonNull modifier) -<< inlines
+            _ -> do
+              inlines <- a -< x
+              arr (modifyNonNull modifier) -<< inlines
         Left _     -> a -< x
     Left _         -> a -< x
   where
@@ -334,6 +337,13 @@ withNewStyle a = proc x -> do
 
     inlineCode :: Inlines -> Inlines
     inlineCode = code . T.concat . map stringify . toList
+
+    -- Avoid constructs like Emph [] / Strong [] for empty paragraphs or spans
+    -- that only carry formatting in their style.
+    modifyNonNull :: InlineModifier -> InlineModifier
+    modifyNonNull modifier inlines
+      | null (toList inlines) = inlines
+      | otherwise             = modifier inlines
 
 type PropertyTriple = (ReaderState, TextProperties, Maybe StyleFamily)
 type InlineModifier = Inlines -> Inlines
